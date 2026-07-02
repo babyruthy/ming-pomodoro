@@ -1,0 +1,6 @@
+{
+  "name": "Ming Pomodoro",
+  "description": "An elegant, minimal, and highly-customizable Pomodoro timer with progress ring, task manager, phone usage penalty, ambient sounds, dark/light theme, and historical statistics dashboard.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
