@@ -482,13 +482,17 @@ export default function App() {
 
   // Mode styling configurations
   const getBackgroundClass = () => {
-    switch (sessionType) {
-      case 'focus':
-        return 'bg-[#ba4949]';
-      case 'shortBreak':
-        return 'bg-[#38858a]';
-      case 'longBreak':
-        return 'bg-[#397097]';
+    if (theme === 'light') {
+      switch (sessionType) {
+        case 'focus':
+          return 'bg-[#ba4949] text-white';
+        case 'shortBreak':
+          return 'bg-[#38858a] text-white';
+        case 'longBreak':
+          return 'bg-[#397097] text-white';
+      }
+    } else {
+      return 'bg-[#000000] text-white';
     }
   };
 
@@ -503,13 +507,21 @@ export default function App() {
     }
   };
 
+  const getStartButtonClass = () => {
+    return 'bg-white hover:bg-white/95 ' + getButtonTextClass();
+  };
+
+  const getProgressBarFillClass = () => {
+    return 'bg-white';
+  };
+
   const saveSettings = (newSettings: Settings) => {
     setSettings(newSettings);
     setIsSettingsOpen(false);
   };
 
   return (
-    <div id="pomodoro-app-root" className={`min-h-screen text-white flex flex-col font-sans transition-colors duration-500 ${getBackgroundClass()}`}>
+    <div id="pomodoro-app-root" className={`min-h-screen flex flex-col font-sans transition-colors duration-500 ${getBackgroundClass()}`}>
       <CanvasConfetti active={isConfettiActive} onComplete={() => setIsConfettiActive(false)} />
 
       {/* --- Top Navbar --- */}
@@ -527,7 +539,7 @@ export default function App() {
 
           <div className="flex items-center gap-2">
             {/* Quick stats indicator */}
-            <div className="hidden md:flex items-center gap-3 px-3 py-1.5 rounded-xl bg-white/10 text-xs font-semibold text-white border border-white/10">
+            <div className="hidden md:flex items-center gap-3 px-3 py-1.5 rounded-xl bg-white/10 text-xs font-semibold text-white border border-white/10 shadow-sm dark:shadow-none">
               <span className="flex items-center gap-1">
                 <Flame className="w-3.5 h-3.5 text-white animate-pulse" />
                 Streak: <strong>{stats.longestStreak}</strong>
@@ -593,10 +605,10 @@ export default function App() {
               type="button"
               id="btn-exit-fullscreen"
               onClick={() => setIsFullscreen(false)}
-              className="absolute top-0 right-0 p-3 text-white/80 hover:text-white bg-white/10 hover:bg-white/20 rounded-full shadow-lg transition-colors cursor-pointer"
+              className="absolute top-0 right-0 p-3 text-white/85 hover:text-white bg-white/10 hover:bg-white/20 rounded-full shadow-lg transition-colors cursor-pointer"
               title="Exit Fullscreen"
             >
-              <Minimize2 className="w-5 h-5 text-white" />
+              <Minimize2 className="w-5 h-5" />
             </button>
 
             {/* Display Ring & Timer */}
@@ -608,7 +620,7 @@ export default function App() {
 
             {/* Minimal Indicators */}
             <div className="mt-8 space-y-4">
-              <div className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold bg-white/10 border border-white/20">
+              <div className="inline-flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold bg-white/10 border border-white/20 text-white shadow-sm dark:shadow-none">
                 <span className="w-2 h-2 rounded-full bg-white animate-pulse" />
                 {activeFocusTask ? `Working on: ${activeFocusTask.title}` : 'Focus Mode Active'}
               </div>
@@ -627,14 +639,14 @@ export default function App() {
             
             {/* Keyboard Shortcuts Help Banner */}
             {showShortcutsHelp && (
-              <div id="shortcuts-help-banner" className="bg-white/10 border border-white/20 p-4 rounded-2xl flex items-start justify-between backdrop-blur-md">
+              <div id="shortcuts-help-banner" className="bg-white/10 border border-white/20 p-4 rounded-2xl flex items-start justify-between backdrop-blur-md shadow-lg">
                 <div className="flex gap-3">
                   <div className="p-2 rounded-xl bg-white/20 text-white mt-0.5">
                     <Keyboard className="w-5 h-5" />
                   </div>
                   <div>
                     <h4 className="text-xs font-bold text-white">Keyboard Shortcuts</h4>
-                    <p className="text-[11px] text-white/70 mt-0.5">Control your workspace instantly using global hotkeys:</p>
+                    <p className="text-[11px] text-white/75 mt-0.5">Control your workspace instantly using global hotkeys:</p>
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-3">
                       <div className="flex items-center gap-2">
                         <kbd className="px-2 py-1 text-[10px] font-bold font-mono bg-white/20 border border-white/10 rounded-md text-white shadow-sm">Space</kbd>
@@ -745,7 +757,7 @@ export default function App() {
 
                 {/* Active Focus Task banner */}
                 {sessionType === 'focus' && activeFocusTask && (
-                  <div className="text-xs font-semibold text-white/90 max-w-sm truncate mt-3 flex items-center gap-1.5 justify-center bg-white/10 px-3 py-1.5 rounded-full border border-white/5">
+                  <div className="text-xs font-semibold text-white/95 max-w-sm truncate mt-3 flex items-center gap-1.5 justify-center bg-white/10 px-3 py-1.5 rounded-full border border-white/5">
                     <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
                     Active: {activeFocusTask.title}
                   </div>
@@ -767,7 +779,7 @@ export default function App() {
                     type="button"
                     id="timer-start-pause-btn"
                     onClick={handleStartPause}
-                    className={`px-10 py-4 bg-white hover:bg-white/95 ${getButtonTextClass()} rounded-2xl font-bold text-sm tracking-widest uppercase shadow-md transition-all active:scale-95 duration-200 cursor-pointer`}
+                    className={`px-10 py-4 ${getStartButtonClass()} rounded-2xl font-bold text-sm tracking-widest uppercase shadow-md hover:shadow-lg transition-all active:scale-95 duration-200 cursor-pointer`}
                   >
                     {isRunning ? 'Pause' : 'Start'}
                   </button>
@@ -790,10 +802,10 @@ export default function App() {
                       type="button"
                       id="btn-phone-penalty"
                       onClick={handlePhonePenalty}
-                      className="px-3.5 py-1.5 text-xs font-semibold bg-black/20 hover:bg-black/30 border border-white/10 text-white rounded-full transition-all flex items-center gap-1.5 active:scale-95 cursor-pointer"
+                      className="px-3.5 py-1.5 text-xs font-semibold bg-white/10 hover:bg-white/20 border border-white/10 text-white rounded-full transition-all flex items-center gap-1.5 active:scale-95 cursor-pointer shadow-sm"
                       title="Trigger +10m penalty for using phone during work"
                     >
-                      <PhoneOff className="w-3.5 h-3.5 text-red-300" />
+                      <PhoneOff className="w-3.5 h-3.5 text-red-200" />
                       I Used My Phone (+10m)
                     </button>
                     
@@ -808,7 +820,7 @@ export default function App() {
                 {/* Break session indicators */}
                 {sessionType !== 'focus' && (
                   <span className="text-xs text-white/70 mt-4 flex items-center gap-1.5">
-                    <Clock className="w-4 h-4 text-white/80" /> Breathe in, breathe out
+                    <Clock className="w-4 h-4 text-white/85" /> Breathe in, breathe out
                   </span>
                 )}
               </div>
@@ -934,7 +946,7 @@ export default function App() {
                   <div className="w-full bg-white/10 h-2.5 rounded-full overflow-hidden border border-white/5">
                     <div
                       id="daily-goal-progress-bar"
-                      className="bg-white h-full rounded-full transition-all duration-500"
+                      className={`${getProgressBarFillClass()} h-full rounded-full transition-all duration-500`}
                       style={{ width: `${Math.min(100, (stats.todayCompletedCount / settings.dailyGoal) * 100)}%` }}
                     />
                   </div>
@@ -956,7 +968,7 @@ export default function App() {
                             isDone
                               ? 'bg-white/20 border-white/30 text-white'
                               : 'border-white/10 text-white/40 bg-transparent'
-                          } ${isCurrent ? 'bg-white text-[#ba4949] border-white font-bold animate-pulse' : ''}`}
+                          } ${isCurrent ? 'bg-white ' + getButtonTextClass() + ' border-white font-bold animate-pulse' : ''}`}
                           title={`Session ${stepNum}`}
                         >
                           {stepNum}
@@ -1024,16 +1036,16 @@ export default function App() {
         />
 
         {/* Content Box */}
-        <div className="bg-slate-900 border border-white/20 rounded-3xl shadow-2xl p-6 max-w-md w-full relative z-10 animate-in fade-in zoom-in-95 duration-200 text-white">
-          <div className="flex items-center justify-between mb-4 pb-3 border-b border-white/10">
-            <h3 className="text-base font-bold text-white flex items-center gap-2">
-              <SettingsIcon className="w-5 h-5 text-white" />
+        <div className="bg-white dark:bg-slate-900 border border-black/5 dark:border-white/20 rounded-3xl shadow-2xl p-6 max-w-md w-full relative z-10 animate-in fade-in zoom-in-95 duration-200 text-slate-800 dark:text-white">
+          <div className="flex items-center justify-between mb-4 pb-3 border-b border-black/5 dark:border-white/10">
+            <h3 className="text-base font-bold text-slate-800 dark:text-white flex items-center gap-2">
+              <SettingsIcon className="w-5 h-5 text-slate-600 dark:text-white" />
               Timer Settings
             </h3>
             <button
               type="button"
               onClick={() => setIsSettingsOpen(false)}
-              className="text-white/60 hover:text-white rounded-lg p-1 cursor-pointer"
+              className="text-slate-500 dark:text-white/60 hover:text-slate-800 dark:hover:text-white rounded-lg p-1 cursor-pointer"
             >
               <X className="w-5 h-5" />
             </button>
@@ -1058,70 +1070,70 @@ export default function App() {
                 dailyGoal: goalVal
               });
             }}
-            className="space-y-4 text-sm text-white"
+            className="space-y-4 text-sm text-slate-800 dark:text-white"
           >
             {/* Focus Duration */}
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-white/60 mb-1.5">Focus Duration (minutes)</label>
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-white/60 mb-1.5">Focus Duration (minutes)</label>
               <input
                 type="number"
                 name="focusDuration"
                 min="1"
                 max="180"
                 defaultValue={settings.focusDuration}
-                className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-1 focus:ring-white text-white font-semibold"
+                className="w-full px-3 py-2 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl focus:outline-none focus:ring-1 focus:ring-slate-400 dark:focus:ring-white text-slate-800 dark:text-white font-semibold"
               />
             </div>
 
             {/* Break Durations */}
             <div className="grid grid-cols-2 gap-3">
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-white/60 mb-1.5">Short Break</label>
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-white/60 mb-1.5">Short Break</label>
                 <input
                   type="number"
                   name="shortBreakDuration"
                   min="1"
                   max="180"
                   defaultValue={settings.shortBreakDuration}
-                  className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-1 focus:ring-white text-white font-semibold"
+                  className="w-full px-3 py-2 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl focus:outline-none focus:ring-1 focus:ring-slate-400 dark:focus:ring-white text-slate-800 dark:text-white font-semibold"
                 />
               </div>
               <div>
-                <label className="block text-xs font-bold uppercase tracking-wider text-white/60 mb-1.5">Long Break</label>
+                <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-white/60 mb-1.5">Long Break</label>
                 <input
                   type="number"
                   name="longBreakDuration"
                   min="1"
                   max="180"
                   defaultValue={settings.longBreakDuration}
-                  className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-1 focus:ring-white text-white font-semibold"
+                  className="w-full px-3 py-2 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl focus:outline-none focus:ring-1 focus:ring-slate-400 dark:focus:ring-white text-slate-800 dark:text-white font-semibold"
                 />
               </div>
             </div>
 
             {/* Daily Goal target */}
             <div>
-              <label className="block text-xs font-bold uppercase tracking-wider text-white/60 mb-1.5">Daily Goal (Pomodoros)</label>
+              <label className="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-white/60 mb-1.5">Daily Goal (Pomodoros)</label>
               <input
                 type="number"
                 name="dailyGoal"
                 min="1"
                 max="24"
                 defaultValue={settings.dailyGoal}
-                className="w-full px-3 py-2 bg-white/5 border border-white/10 rounded-xl focus:outline-none focus:ring-1 focus:ring-white text-white font-semibold"
+                className="w-full px-3 py-2 bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-xl focus:outline-none focus:ring-1 focus:ring-slate-400 dark:focus:ring-white text-slate-800 dark:text-white font-semibold"
               />
             </div>
 
             {/* Checkbox triggers */}
-            <div className="space-y-2.5 pt-2 border-t border-white/10">
+            <div className="space-y-2.5 pt-2 border-t border-black/5 dark:border-white/10">
               <label className="flex items-center gap-2.5 cursor-pointer">
                 <input
                   type="checkbox"
                   name="autoStartNextSession"
                   defaultChecked={settings.autoStartNextSession}
-                  className="rounded border-white/20 text-slate-800 focus:ring-white w-4 h-4"
+                  className="rounded border-slate-300 dark:border-white/20 text-slate-800 focus:ring-slate-400 dark:focus:ring-white w-4 h-4 bg-transparent"
                 />
-                <span className="font-medium text-xs text-white/80">Auto-start next session automatically</span>
+                <span className="font-medium text-xs text-slate-600 dark:text-white/80">Auto-start next session automatically</span>
               </label>
 
               <label className="flex items-center gap-2.5 cursor-pointer">
@@ -1129,9 +1141,9 @@ export default function App() {
                   type="checkbox"
                   name="notificationSound"
                   defaultChecked={settings.notificationSound}
-                  className="rounded border-white/20 text-slate-800 focus:ring-white w-4 h-4"
+                  className="rounded border-slate-300 dark:border-white/20 text-slate-800 focus:ring-slate-400 dark:focus:ring-white w-4 h-4 bg-transparent"
                 />
-                <span className="font-medium text-xs text-white/80">Play tone on start/pause/complete</span>
+                <span className="font-medium text-xs text-slate-600 dark:text-white/80">Play tone on start/pause/complete</span>
               </label>
 
               <label className="flex items-center gap-2.5 cursor-pointer">
@@ -1139,14 +1151,14 @@ export default function App() {
                   type="checkbox"
                   name="browserNotifications"
                   defaultChecked={settings.browserNotifications}
-                  className="rounded border-white/20 text-slate-800 focus:ring-white w-4 h-4"
+                  className="rounded border-slate-300 dark:border-white/20 text-slate-800 focus:ring-slate-400 dark:focus:ring-white w-4 h-4 bg-transparent"
                 />
-                <span className="font-medium text-xs text-white/80">Display browser desk notifications</span>
+                <span className="font-medium text-xs text-slate-600 dark:text-white/80">Display browser desk notifications</span>
               </label>
             </div>
 
             {/* Submit & Reset actions */}
-            <div className="flex gap-2 pt-4 border-t border-white/10">
+            <div className="flex gap-2 pt-4 border-t border-black/5 dark:border-white/10">
               <button
                 type="button"
                 id="btn-settings-reset-defaults"
@@ -1155,14 +1167,14 @@ export default function App() {
                     saveSettings(DEFAULT_SETTINGS);
                   }
                 }}
-                className="flex-1 py-2 text-xs font-semibold text-white/60 hover:bg-white/5 rounded-xl transition-colors border border-white/10 cursor-pointer"
+                className="flex-1 py-2 text-xs font-semibold text-slate-500 dark:text-white/60 hover:bg-black/5 dark:hover:bg-white/5 rounded-xl transition-colors border border-black/10 dark:border-white/10 cursor-pointer"
               >
                 Defaults
               </button>
               <button
                 type="submit"
                 id="btn-settings-save"
-                className="flex-1 py-2 text-xs font-bold bg-white text-slate-950 hover:bg-white/90 rounded-xl shadow-sm transition-all cursor-pointer"
+                className="flex-1 py-2 text-xs font-bold bg-slate-900 dark:bg-white text-white dark:text-slate-950 hover:bg-slate-800 dark:hover:bg-white/90 rounded-xl shadow-md transition-all cursor-pointer"
               >
                 Save Settings
               </button>

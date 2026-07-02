@@ -71,8 +71,8 @@ export default function TaskSidebar({
         id={`task-item-${task.id}`}
         className={`group relative flex flex-col p-3 rounded-xl border transition-all duration-200 ${
           isActive
-            ? 'bg-white/20 border-white/40 shadow-sm text-white'
-            : 'bg-white/5 border-white/10 hover:border-white/20 hover:bg-white/10 text-white'
+            ? 'bg-white/20 border-white/30 text-white shadow-sm'
+            : 'bg-white/5 border-white/10 hover:border-white/20 hover:bg-white/10 text-white/80 hover:text-white'
         } ${task.completed ? 'opacity-50' : ''}`}
       >
         {isEditing ? (
@@ -119,7 +119,7 @@ export default function TaskSidebar({
                   type="button"
                   id={`edit-task-cancel-${task.id}`}
                   onClick={cancelEdit}
-                  className="p-1 text-white/60 hover:text-white hover:bg-white/5 rounded-md transition-colors cursor-pointer"
+                  className="p-1 text-white/60 hover:text-white hover:bg-white/10 rounded-md transition-colors cursor-pointer"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -170,7 +170,7 @@ export default function TaskSidebar({
                 </span>
                 
                 {task.isToday && (
-                  <span className="inline-flex items-center px-1.5 py-0.2 rounded-full text-[9px] font-medium bg-white/10 text-white/90">
+                  <span className="inline-flex items-center px-1.5 py-0.2 rounded-full text-[9px] font-medium bg-white/10 text-white">
                     Today
                   </span>
                 )}
@@ -187,17 +187,17 @@ export default function TaskSidebar({
                   className={`p-1 rounded-md transition-colors ${
                     isActive
                       ? 'text-white bg-white/20'
-                      : 'text-white/60 hover:text-white hover:bg-white/10'
+                      : 'text-white/65 hover:text-white hover:bg-white/10'
                   } cursor-pointer`}
                 >
-                  <Play className={`w-3.5 h-3.5 ${isActive ? 'fill-white' : ''}`} />
+                  <Play className={`w-3.5 h-3.5 ${isActive ? 'fill-current' : ''}`} />
                 </button>
               )}
               <button
                 type="button"
                 id={`task-edit-${task.id}`}
                 onClick={() => startEditing(task)}
-                className="p-1 text-white/60 hover:text-white hover:bg-white/10 rounded-md transition-colors cursor-pointer"
+                className="p-1 text-white/65 hover:text-white hover:bg-white/10 rounded-md transition-colors cursor-pointer"
               >
                 <Edit2 className="w-3.5 h-3.5" />
               </button>
@@ -205,7 +205,7 @@ export default function TaskSidebar({
                 type="button"
                 id={`task-delete-${task.id}`}
                 onClick={() => onDeleteTask(task.id)}
-                className="p-1 text-white/60 hover:text-white hover:bg-white/10 rounded-md transition-colors cursor-pointer"
+                className="p-1 text-white/65 hover:text-white hover:bg-white/10 rounded-md transition-colors cursor-pointer"
               >
                 <Trash2 className="w-3.5 h-3.5" />
               </button>
@@ -231,7 +231,7 @@ export default function TaskSidebar({
         <form
           id="add-task-form"
           onSubmit={handleSubmit}
-          className="mb-4 p-4 bg-white/10 border border-white/20 rounded-2xl shadow-sm flex flex-col gap-3"
+          className="mb-4 p-4 bg-white/10 border border-white/20 rounded-2xl shadow-md flex flex-col gap-3"
         >
           <input
             type="text"
@@ -250,7 +250,7 @@ export default function TaskSidebar({
                 <button
                   type="button"
                   onClick={() => setNewEstPomodoros(Math.max(1, newEstPomodoros - 1))}
-                  className="px-2 py-1 hover:text-white font-semibold cursor-pointer"
+                  className="px-2 py-1 text-white/60 hover:text-white font-semibold cursor-pointer"
                 >
                   -
                 </button>
@@ -258,7 +258,7 @@ export default function TaskSidebar({
                 <button
                   type="button"
                   onClick={() => setNewEstPomodoros(Math.min(10, newEstPomodoros + 1))}
-                  className="px-2 py-1 hover:text-white font-semibold cursor-pointer"
+                  className="px-2 py-1 text-white/60 hover:text-white font-semibold cursor-pointer"
                 >
                   +
                 </button>
@@ -293,7 +293,7 @@ export default function TaskSidebar({
               type="submit"
               id="add-task-save-btn"
               disabled={!newTaskTitle.trim()}
-              className="px-4 py-1.5 text-xs bg-white text-slate-800 disabled:opacity-50 hover:bg-white/90 rounded-lg font-bold shadow-sm transition-colors cursor-pointer"
+              className="px-4 py-1.5 text-xs bg-white text-slate-800 disabled:opacity-50 hover:bg-white/95 rounded-lg font-bold shadow-md transition-colors cursor-pointer"
             >
               Add Task
             </button>
@@ -351,7 +351,7 @@ export default function TaskSidebar({
       </div>
 
       {activeTaskId && (
-        <div className="mt-6 p-3 bg-white/10 border border-white/20 rounded-xl flex items-center justify-between">
+        <div className="mt-6 p-3 bg-white/10 border border-white/20 rounded-xl flex items-center justify-between shadow-md">
           <div className="min-w-0">
             <p className="text-[10px] text-white/60 font-semibold uppercase tracking-wider">Active Focus</p>
             <p className="text-xs text-white font-medium truncate mt-0.5">

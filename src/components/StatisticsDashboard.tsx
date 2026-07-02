@@ -85,9 +85,9 @@ export default function StatisticsDashboard({ stats, onClearHistory }: Statistic
       {/* Overview Cards Grid */}
       <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4">
         {/* Card 1 */}
-        <div className="bg-white/10 border border-white/20 p-4 rounded-2xl shadow-sm backdrop-blur-md hover:bg-white/15 transition-all">
+        <div className="bg-white/10 border border-white/20 p-4 rounded-2xl shadow-md backdrop-blur-md hover:bg-white/15 transition-all">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-bold text-white/60 uppercase tracking-wider">Today's Focus</span>
+            <span className="text-[11px] font-bold text-white/70 uppercase tracking-wider">Today's Focus</span>
             <Award className="w-4 h-4 text-white" />
           </div>
           <div className="mt-2.5 flex items-baseline gap-1">
@@ -97,9 +97,9 @@ export default function StatisticsDashboard({ stats, onClearHistory }: Statistic
         </div>
 
         {/* Card 2 */}
-        <div className="bg-white/10 border border-white/20 p-4 rounded-2xl shadow-sm backdrop-blur-md hover:bg-white/15 transition-all">
+        <div className="bg-white/10 border border-white/20 p-4 rounded-2xl shadow-md backdrop-blur-md hover:bg-white/15 transition-all">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-bold text-white/60 uppercase tracking-wider">Total Focus</span>
+            <span className="text-[11px] font-bold text-white/70 uppercase tracking-wider">Total Focus</span>
             <Award className="w-4 h-4 text-white" />
           </div>
           <div className="mt-2.5 flex items-baseline gap-1">
@@ -109,9 +109,9 @@ export default function StatisticsDashboard({ stats, onClearHistory }: Statistic
         </div>
 
         {/* Card 3 */}
-        <div className="bg-white/10 border border-white/20 p-4 rounded-2xl shadow-sm backdrop-blur-md hover:bg-white/15 transition-all">
+        <div className="bg-white/10 border border-white/20 p-4 rounded-2xl shadow-md backdrop-blur-md hover:bg-white/15 transition-all">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-bold text-white/60 uppercase tracking-wider">Focus Time</span>
+            <span className="text-[11px] font-bold text-white/70 uppercase tracking-wider">Focus Time</span>
             <Clock className="w-4 h-4 text-white" />
           </div>
           <div className="mt-2.5 flex items-baseline gap-1">
@@ -122,9 +122,9 @@ export default function StatisticsDashboard({ stats, onClearHistory }: Statistic
         </div>
 
         {/* Card 4 */}
-        <div className="bg-white/10 border border-white/20 p-4 rounded-2xl shadow-sm backdrop-blur-md hover:bg-white/15 transition-all">
+        <div className="bg-white/10 border border-white/20 p-4 rounded-2xl shadow-md backdrop-blur-md hover:bg-white/15 transition-all">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-bold text-white/60 uppercase tracking-wider">Focus Streak</span>
+            <span className="text-[11px] font-bold text-white/70 uppercase tracking-wider">Focus Streak</span>
             <Flame className="w-4 h-4 text-white" />
           </div>
           <div className="mt-2.5 flex items-baseline gap-1">
@@ -134,9 +134,9 @@ export default function StatisticsDashboard({ stats, onClearHistory }: Statistic
         </div>
 
         {/* Card 5 */}
-        <div className="bg-white/10 border border-white/20 p-4 rounded-2xl shadow-sm backdrop-blur-md hover:bg-white/15 transition-all">
+        <div className="bg-white/10 border border-white/20 p-4 rounded-2xl shadow-md backdrop-blur-md hover:bg-white/15 transition-all">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-bold text-white/60 uppercase tracking-wider">Phone Usage</span>
+            <span className="text-[11px] font-bold text-white/70 uppercase tracking-wider">Phone Usage</span>
             <PhoneOff className="w-4 h-4 text-white" />
           </div>
           <div className="mt-2.5 flex items-baseline gap-1">
@@ -146,9 +146,9 @@ export default function StatisticsDashboard({ stats, onClearHistory }: Statistic
         </div>
 
         {/* Card 6 */}
-        <div className="bg-white/10 border border-white/20 p-4 rounded-2xl shadow-sm backdrop-blur-md hover:bg-white/15 transition-all">
+        <div className="bg-white/10 border border-white/20 p-4 rounded-2xl shadow-md backdrop-blur-md hover:bg-white/15 transition-all">
           <div className="flex items-center justify-between">
-            <span className="text-[11px] font-bold text-white/60 uppercase tracking-wider">Avg Session</span>
+            <span className="text-[11px] font-bold text-white/70 uppercase tracking-wider">Avg Session</span>
             <Clock className="w-4 h-4 text-white" />
           </div>
           <div className="mt-2.5 flex items-baseline gap-1">
@@ -163,13 +163,13 @@ export default function StatisticsDashboard({ stats, onClearHistory }: Statistic
       {/* Graphs & Detailed Logs */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Weekly Productivity SVG Graph */}
-        <div className="bg-white/10 border border-white/20 p-5 rounded-2xl shadow-sm backdrop-blur-md lg:col-span-2">
+        <div className="bg-white/10 border border-white/20 p-5 rounded-2xl shadow-md backdrop-blur-md lg:col-span-2">
           <div className="flex items-center justify-between mb-4">
             <div>
               <h3 className="text-sm font-semibold text-white">Weekly Productivity</h3>
               <p className="text-xs text-white/60">Total focus minutes over the last 7 days</p>
             </div>
-            <span className="text-xs font-medium text-white/80 bg-white/10 px-2.5 py-1 rounded-full flex items-center gap-1">
+            <span className="text-xs font-medium text-white/80 bg-white/10 px-2.5 py-1 rounded-full flex items-center gap-1 border border-white/10">
               <Calendar className="w-3.5 h-3.5" />
               Past 7 Days
             </span>
@@ -179,9 +179,9 @@ export default function StatisticsDashboard({ stats, onClearHistory }: Statistic
           <div className="relative w-full h-[180px] mt-2 flex items-end">
             <svg viewBox="0 0 560 180" className="w-full h-full overflow-visible">
               {/* Guidelines */}
-              <line x1="40" y1="20" x2="540" y2="20" stroke="rgba(255,255,255,0.1)" strokeDasharray="3,3" />
-              <line x1="40" y1="80" x2="540" y2="80" stroke="rgba(255,255,255,0.1)" strokeDasharray="3,3" />
-              <line x1="40" y1="140" x2="540" y2="140" stroke="rgba(255,255,255,0.2)" />
+              <line x1="40" y1="20" x2="540" y2="20" className="stroke-white/10" strokeDasharray="3,3" />
+              <line x1="40" y1="80" x2="540" y2="80" className="stroke-white/10" strokeDasharray="3,3" />
+              <line x1="40" y1="140" x2="540" y2="140" className="stroke-white/20" />
 
               {/* Y Axis Labels */}
               <text x="15" y="24" className="text-[10px] fill-white/60 font-mono text-right">{maxMinutes}m</text>
@@ -219,7 +219,7 @@ export default function StatisticsDashboard({ stats, onClearHistory }: Statistic
                       className={`transition-all duration-300 ${
                         isHovered 
                           ? 'fill-white filter drop-shadow-[0_2px_8px_rgba(255,255,255,0.6)]'
-                          : 'fill-white/40'
+                          : 'fill-white/30'
                       }`}
                     />
 
@@ -266,7 +266,7 @@ export default function StatisticsDashboard({ stats, onClearHistory }: Statistic
         </div>
 
         {/* Session Log & Control */}
-        <div className="bg-white/10 border border-white/20 p-5 rounded-2xl shadow-sm backdrop-blur-md flex flex-col justify-between">
+        <div className="bg-white/10 border border-white/20 p-5 rounded-2xl shadow-md backdrop-blur-md flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between mb-3">
               <h3 className="text-sm font-semibold text-white">Session History</h3>
